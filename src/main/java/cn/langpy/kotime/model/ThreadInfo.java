@@ -1,5 +1,6 @@
 package cn.langpy.kotime.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ThreadInfo {
@@ -10,6 +11,7 @@ public class ThreadInfo {
     private Boolean isInterrupted;
     private Boolean isDaemon;
     private Integer priority;
+    private BigDecimal cpuUsage;
     private List<StackTraceElement> stacks;
 
     public Long getId() {
@@ -66,6 +68,14 @@ public class ThreadInfo {
 
     public void setPriority(Integer priority) {
         this.priority = priority;
+    }
+
+    public BigDecimal getCpuUsage() {
+        return cpuUsage;
+    }
+
+    public void setCpuUsage(BigDecimal cpuUsage) {
+        this.cpuUsage = cpuUsage;
     }
 
     public List<StackTraceElement> getStacks() {
