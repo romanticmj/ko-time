@@ -1,9 +1,13 @@
 package cn.langpy.kotime.model;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.List;
 
 public class ThreadInfo {
+
+    public static final ThreadInfoComparator COMPARATOR = new ThreadInfoComparator();
+
     private Long id;
     private String name;
     private String classType;
@@ -85,4 +89,18 @@ public class ThreadInfo {
     public void setStacks(List<StackTraceElement> stacks) {
         this.stacks = stacks;
     }
+
+    /**
+     * 状态码排序 + CPU使用率倒排
+     */
+    public static class ThreadInfoComparator implements Comparator<ThreadInfo> {
+        @Override
+        public int compare(ThreadInfo a, ThreadInfo b) {
+            if (a.getState().compareTo(b.getState()) == 0 ) {
+                return b.getCpuUsage().compareTo(a.getCpuUsage());
+            }
+            return a.getState().compareTo(b.getState());
+        }
+    }
+
 }
